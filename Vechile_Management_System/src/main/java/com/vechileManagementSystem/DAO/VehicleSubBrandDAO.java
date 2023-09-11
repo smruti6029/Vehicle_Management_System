@@ -2,6 +2,8 @@ package com.vechileManagementSystem.DAO;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.SessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
@@ -15,6 +17,9 @@ public class VehicleSubBrandDAO {
 
 	@Autowired
 	private HibernateTemplate hibernateTemplate;
+	
+	@Autowired
+	private SessionFactory sessionFactory;
 
 	public Integer saveSubBrand(SubShowRoom subBrandLocation) {
 
@@ -28,17 +33,20 @@ public class VehicleSubBrandDAO {
 	}
 
 	public List<SubShowRoom> getAllshowroom() {
-		try {
-			List<SubShowRoom> showrooms = hibernateTemplate.loadAll(SubShowRoom.class);
-			return showrooms;
-		} catch (Exception e) {
-			return null;
-		}
+//		try {
+//			List<SubShowRoom> showrooms = hibernateTemplate.loadAll(SubShowRoom.class);
+//			return showrooms;
+//		} catch (Exception e) {
+//			return null;
+//		}
+		Criteria criteria=sessionFactory.getCurrentSession().createCriteria(SubShowRoom.class);
+		
+		return criteria.list();
 
 	}
 
 	public SubShowRoom getSUbshowroom(Integer id) {
 		return null;
 	}
-
+	
 }

@@ -56,5 +56,22 @@ public class GetCustomerDetalisWithVehicle {
 		}
 
 	}
+	
+	
+
+	public AssignVehicleForSubbranch custumeNumberwithDetalis(String vehicle_number)
+	{
+		Customer custumergmail = customerDAO.getNumber(vehicle_number);
+		if(custumergmail==null)
+		{
+			return null;
+		}
+		else
+		{
+			AssignVehicleForSubbranch customer = assignVehicle.getCustomer(custumergmail.getCustomer_id());
+			return customer;
+		}
+		
+	}
 
 }

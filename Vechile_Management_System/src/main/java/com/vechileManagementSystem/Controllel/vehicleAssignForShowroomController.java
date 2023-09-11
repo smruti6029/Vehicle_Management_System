@@ -67,5 +67,52 @@ public class vehicleAssignForShowroomController {
 		}
 
 	}
+	
+	
+	@GetMapping("/number/{number}")
+	public ResponseEntity<?> engineNumberDetalis(@PathVariable("number") String number)
+	{
+		System.out.println(number);
+		
+		
+		AssignVehicleForSubbranch vehicleWithNumber = assignVehicleInShowroom.getvehicleWithNumber(number);
+		
+		if(vehicleWithNumber!=null)
+		{
+			return new ResponseEntity<AssignVehicleForSubbranch>(vehicleWithNumber,HttpStatus.OK);
+		}
+		else
+		{
+			return new ResponseEntity<String>("Vehicle Not Present",HttpStatus.BAD_REQUEST);
+		}
+		
+		
+	}
 
+	@GetMapping("/assigncount")
+	public ResponseEntity<?> assignVechileCount() {
+		try {
+			String assignornotassign = assignVehicleInShowroom.getAssignornotassign();
+			if (assignornotassign != null) {
+				return new ResponseEntity<String>(assignornotassign, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<String>("No Content", HttpStatus.BAD_REQUEST);
+			}
+		} catch (Exception e) {
+			return new ResponseEntity<String>("Bad Request", HttpStatus.INTERNAL_SERVER_ERROR);
+
+		}
+
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

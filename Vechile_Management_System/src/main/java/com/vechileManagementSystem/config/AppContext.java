@@ -67,4 +67,7 @@ public class AppContext {
 		transactionManager.setSessionFactory(sessionFactory);
 		return transactionManager;
 	}
+	
+	
+	
 }

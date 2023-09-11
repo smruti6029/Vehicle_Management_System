@@ -38,7 +38,7 @@ public class VehicleShowroomController {
 	}
 	
 	
-//	Get all Showroom With Brand and Location 
+//	Get all Showroom With Brand and Location avilable only 
 	
 	@GetMapping("/brandwithshowroom")
 	public ResponseEntity<?> showroomWithBrand()

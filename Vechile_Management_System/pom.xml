@@ -68,6 +68,43 @@
 			<artifactId>jackson-databind</artifactId>
 			<version>2.13.4.2</version>
 		</dependency>
+		
+		
+		
+		 <!--
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-web</artifactId>
+			<version>5.2.4.RELEASE</version>
+		</dependency>
+
+
+		<dependency>
+			<groupId>org.springframework.security</groupId>
+			<artifactId>spring-security-config</artifactId>
+			<version>5.2.4.RELEASE</version>
+		</dependency>
+		
+		-->
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-context-support</artifactId>
+			<version>5.3.10</version> <!-- Use the version that matches your
+			project -->
+		</dependency>
+		<dependency>
+			<groupId>javax.mail</groupId>
+			<artifactId>javax.mail-api</artifactId>
+			<version>1.6.2</version> <!-- Use the version that matches your
+			project -->
+		</dependency>
+
+		<dependency>
+			<groupId>com.sun.mail</groupId>
+			<artifactId>javax.mail</artifactId>
+			<version>1.6.2</version> <!-- Use the appropriate version -->
+		</dependency>
 
 
 		<dependency>

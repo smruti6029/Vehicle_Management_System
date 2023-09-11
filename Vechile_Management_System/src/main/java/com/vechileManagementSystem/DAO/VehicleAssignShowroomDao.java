@@ -2,6 +2,9 @@ package com.vechileManagementSystem.DAO;
 
 import java.util.List;
 
+import org.hibernate.Criteria;
+import org.hibernate.SessionFactory;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.orm.hibernate5.HibernateTemplate;
 import org.springframework.stereotype.Repository;
@@ -12,9 +15,16 @@ import com.vechileManagementSystem.Entity.AssignVehicleForSubbranch;
 @Repository
 @Transactional
 public class VehicleAssignShowroomDao {
+	
+
 
 	@Autowired
-	HibernateTemplate hibernateTemplate;
+	private HibernateTemplate hibernateTemplate;
+	
+	@Autowired
+	private SessionFactory sessionFactory;
+	
+	
 
 	public Integer insertAssignvehicle(AssignVehicleForSubbranch obj) {
 
@@ -29,15 +39,22 @@ public class VehicleAssignShowroomDao {
 
 	public AssignVehicleForSubbranch getVehicleNumber(String vehicle_number) {
 
-		try {
-			List<AssignVehicleForSubbranch> assignVehicleForSubbranchs = (List<AssignVehicleForSubbranch>) hibernateTemplate
-					.findByNamedParam("from AssignVehicleForSubbranch where vehicle_number = :vehicle_number",
-							"vehicle_number", vehicle_number);
+//		try {
+//			List<AssignVehicleForSubbranch> assignVehicleForSubbranchs = (List<AssignVehicleForSubbranch>) hibernateTemplate
+//					.findByNamedParam("from AssignVehicleForSubbranch where vehicle_number = :vehicle_number",
+//							"vehicle_number", vehicle_number);
+//
+//			return assignVehicleForSubbranchs.get(0);
+//		} catch (Exception e) {
+//			return null;
+//		}
+		Criteria cr=sessionFactory.getCurrentSession().createCriteria(AssignVehicleForSubbranch.class);
+		cr.add(Restrictions.eq("vehicle_number",vehicle_number));
+		
+		
+		return  (AssignVehicleForSubbranch) cr.list().get(0);
 
-			return assignVehicleForSubbranchs.get(0);
-		} catch (Exception e) {
-			return null;
-		}
+				
 
 	}
 

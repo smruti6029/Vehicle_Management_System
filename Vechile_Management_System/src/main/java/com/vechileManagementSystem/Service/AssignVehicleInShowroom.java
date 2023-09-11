@@ -87,6 +87,19 @@ public class AssignVehicleInShowroom {
 						VehicleType typeofVehicle = vehicle.getVehicle_type();
 						String vehicletype = typeofVehicle.toString();
 						if (vehicletype.equalsIgnoreCase(type)) {
+							boolean check=true;
+							Integer count=1;
+							for(ShowAvilabeDetalis s:avilabeDetalis)
+							{
+								if(s.getBrand_name().equals(vehicle.getBrandLocaton().getVehicleBrand_id().getVehicle_brand_name()));
+								{
+									check=false;
+									count++;
+									s.setAvilble_vehicle(count);
+								}
+							}
+							if(check)
+							{
 							ShowAvilabeDetalis obj = new ShowAvilabeDetalis();
 							obj.setVehicle_name(vehicle.getVechile_name());
 							obj.setColour(vehicle.getColour());
@@ -94,9 +107,12 @@ public class AssignVehicleInShowroom {
 							obj.setType(vehicle.getVehicle_type());
 							obj.setBrand_name(vehicle.getBrandLocaton().getVehicleBrand_id().getVehicle_brand_name());
 							obj.setLocation(vehicle.getBrandLocaton().getLocation());
+							obj.setAvilble_vehicle(count);
+							
 							
 							
 							avilabeDetalis.add(obj);
+							}
 
 						}
 					}
@@ -119,4 +135,53 @@ public class AssignVehicleInShowroom {
 		return avilableAll;
 	}
 
+	
+	
+	public AssignVehicleForSubbranch getvehicleWithNumber(String number)
+	{
+		try
+		{
+		AssignVehicleForSubbranch vehicleNumber = assignShowroomDao.getVehicleNumber(number);
+		if(vehicleNumber!=null)
+		{
+			return vehicleNumber;
+		}
+		else
+		{
+			return null;
+		}
+		
+		}
+		catch (Exception e) {
+			return null;
+		}
+		
+		
+	}
+	
+public String getAssignornotassign() {
+		
+		List<AssignVehicleForSubbranch> avilableAll = assignShowroomDao.getAvilableAll();
+		int count=0,count1=0;
+		for(AssignVehicleForSubbranch s:avilableAll)
+		{
+			if(s.getAvilable())
+			{
+				count++;
+			}
+			else
+			{
+				count1++;
+			}
+		}
+		String result="Number Unassign Vehicle - "+count+" Number Of Assign Vehicle - " +count1;
+		
+		
+		
+		return result;
+		
+	}
+	
+	
+	
 }

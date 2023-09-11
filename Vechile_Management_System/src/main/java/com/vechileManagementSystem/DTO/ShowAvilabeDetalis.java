@@ -17,8 +17,22 @@ public class ShowAvilabeDetalis {
 	
 	private String vehicle_name;
 	
+	private Integer avilble_vehicle;
 	
 	
+	
+	
+	
+	
+	
+
+	public Integer getAvilble_vehicle() {
+		return avilble_vehicle;
+	}
+
+	public void setAvilble_vehicle(Integer avilble_vehicle) {
+		this.avilble_vehicle = avilble_vehicle;
+	}
 
 	public String getLocation() {
 		return location;

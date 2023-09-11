@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.vechileManagementSystem.DTO.CustomerDto;
 import com.vechileManagementSystem.DTO.CustumerdetaliesWithVehicleDetalis;
+import com.vechileManagementSystem.Entity.AssignVehicleForSubbranch;
 import com.vechileManagementSystem.Service.CustomerService;
 import com.vechileManagementSystem.Service.GetCustomerDetalisWithVehicle;
 
@@ -61,5 +62,21 @@ public class CustomerController {
 			return new ResponseEntity<String>("Bad Request", HttpStatus.BAD_REQUEST);
 		}
 	}
+	
+		@GetMapping("/number/{number}")
+			public ResponseEntity<?> custumerdetalisInnumber(@PathVariable("number") String number)
+			{
+				
+			AssignVehicleForSubbranch custumeNumberwithDetalis = customerDetalisWithVehicle.custumeNumberwithDetalis(number);
+			if(custumeNumberwithDetalis!=null)
+			{
+				return new ResponseEntity<>(custumeNumberwithDetalis,HttpStatus.OK);
+			}
+			else
+			{
+				return new ResponseEntity<>("No User Found",HttpStatus.BAD_REQUEST);
+			}
+			
+			}
 
 }

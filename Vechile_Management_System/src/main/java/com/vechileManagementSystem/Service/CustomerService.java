@@ -3,6 +3,8 @@ package com.vechileManagementSystem.Service;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+import javax.mail.MessagingException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,6 +13,7 @@ import com.vechileManagementSystem.DAO.VehicleAssignShowroomDao;
 import com.vechileManagementSystem.DTO.CustomerDto;
 import com.vechileManagementSystem.Entity.AssignVehicleForSubbranch;
 import com.vechileManagementSystem.Entity.Customer;
+import com.vechileManagementSystem.MailService.EmailSendService;
 
 @Service
 public class CustomerService {
@@ -20,10 +23,14 @@ public class CustomerService {
 
 	@Autowired
 	private VehicleAssignShowroomDao assignDao;
+	
+	@Autowired
+	private EmailSendService emailSendService;
 
-	public Integer addCustumer(CustomerDto customer) {
+	
+	public Integer addCustumer(CustomerDto customer) throws MessagingException {
 
-		System.out.println(customer.getGmail());
+		System.out.println(customer.getGmail()+"Inside it vehicle ");
 
 		Customer bygmail = customerDAO.getBygmail(customer.getGmail());
 		System.out.println(bygmail);
@@ -33,6 +40,7 @@ public class CustomerService {
 			String vehicle_number_assign = "OD-33";
 			int count = 0;
 			Customer addCustomer = new Customer();
+			
 			
 			
 			if(customer.getDateof_bookVehicle()==null)
@@ -82,9 +90,15 @@ public class CustomerService {
 					assignVehicleForShowroom.setCustomer(addCustomer);
 
 					Integer updateVehicleStatus = assignDao.updateVehicleStatus(assignVehicleForShowroom);
-					return 1;
+					
+					
+					
 				}
-
+				Customer customerDetalis = customerDAO.getBygmail(customer.getGmail());
+				AssignVehicleForSubbranch customer2 = assignDao.getCustomer(customerDetalis.getCustomer_id());
+				emailSendService.sendEmail(customer2);
+				return 1;
+				
 			}
 
 		} else {
@@ -93,4 +107,16 @@ public class CustomerService {
 		return 0;
 
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
